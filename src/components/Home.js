@@ -12,10 +12,10 @@ export default class Home extends Component {
         // then set them in state
         try{
           const params = {
-            "tl1" : "1985-03-25T00:00:00Z",
-            "tl2" : "1985-07-28T00:00:00Z"
+            "tl1": "1985-03-25T00:00:00Z",
+            "tl2": "1985-07-28T00:00:00Z"
           }
-          const res = await axios.get("https://3sr0gz6a0j.execute-api.ap-southeast-1.amazonaws.com/prod/tripremana", params);
+          const res = await axios.post("https://v6e49pog65.execute-api.ap-southeast-1.amazonaws.com/prod/tripremana/", params);
           this.setState({match : res.data});
         }catch(err){
           console.log(`An Error has occured: ${err}`)
@@ -32,21 +32,21 @@ export default class Home extends Component {
                 <h2>Welcome</h2>
                 <Form>
                     <FormGroup>
-                    <Label for="exampleDate1">Tanggal Lahir Kamu</Label>
+                    <Label for="tl1">Tanggal Lahir Kamu</Label>
                     <Input
                         type="date"
-                        name="date1"
-                        id="exampleDate1"
+                        name="tl1"
+                        id="tl1"
                         placeholder="date placeholder"
                     />
                     </FormGroup>
 
                     <FormGroup>
-                    <Label for="exampleDate2">Tanggal Lahir Pasanganmu</Label>
+                    <Label for="tl2">Tanggal Lahir Pasanganmu</Label>
                     <Input
                         type="date"
-                        name="date2"
-                        id="exampleDate2"
+                        name="tl2"
+                        id="tl2"
                         placeholder="date placeholder"
                     />
                     </FormGroup>
