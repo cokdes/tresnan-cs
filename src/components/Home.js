@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Container, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Container, Button, Form, FormGroup, Label, Input, Navbar, NavbarBrand, Row, Col } from 'reactstrap';
 import axios from 'axios';
 
 export default class Home extends Component {
     state = {
+        wewaran_kamu : {},
+        wewaran_pasangan : {},
         match : {}
     }
     
@@ -16,7 +18,9 @@ export default class Home extends Component {
             "tl2": "1985-07-28T00:00:00Z"
           }
           const res = await axios.post("https://v6e49pog65.execute-api.ap-southeast-1.amazonaws.com/prod/tripremana/", params);
-          this.setState({match : res.data});
+          this.setState({wewaran_kamu : res.data.wewaran_kamu});
+          this.setState({wewaran_pasangan : res.data.wewaran_pasangan});
+          this.setState({match : res.data.hasil_tripremana});
         }catch(err){
           console.log(`An Error has occured: ${err}`)
         }
@@ -28,35 +32,48 @@ export default class Home extends Component {
 
     render() {
         return (
-            <Container>
-                <h2>Welcome</h2>
-                <Form>
-                    <FormGroup>
-                    <Label for="tl1">Tanggal Lahir Kamu</Label>
-                    <Input
-                        type="date"
-                        name="tl1"
-                        id="tl1"
-                        placeholder="date placeholder"
-                    />
-                    </FormGroup>
+          <div>
+            <Navbar color="faded" light expand="md">
+              <NavbarBrand href="/"><img src="logo_tresnan.png" alt="Logo" width="160"/></NavbarBrand>
+            </Navbar>
+              <Container>
+                <Row>
+                  <Col xs="6">
+                  <h3 color="#364F6B">Cek Kecocokan Jodoh Kamu</h3>
+                <div style={{backgroundColor:"#f5f5f5", borderRadius:10, padding:10}}>
+                  <Form>
+                      <FormGroup>
+                      <Input
+                          name="tl1"
+                          id="tl1"
+                          placeholder="date placeholder"
+                          style={{borderRadius:18, width: 300}}
+                      />
+                      </FormGroup>
 
-                    <FormGroup>
-                    <Label for="tl2">Tanggal Lahir Pasanganmu</Label>
-                    <Input
-                        type="date"
-                        name="tl2"
-                        id="tl2"
-                        placeholder="date placeholder"
-                    />
-                    </FormGroup>
-                    {' '}
-                    <Button color="primary">Submit</Button>
-                </Form>
-                <div>
-                    {this.state.match.matching_level}
+                      <FormGroup>
+                      <Label for="tl2">Tanggal Lahir Pasanganmu</Label>
+                      <Input
+                          type="date"
+                          name="tl2"
+                          id="tl2"
+                          placeholder="date placeholder"
+                          style={{borderRadius:18, width: 300}}
+                      />
+                      </FormGroup>
+                      {' '}
+                      <Button style={{backgroundColor:"#FC5185", borderRadius:18, border:"none", width:100}}>Submit</Button>
+                  </Form>
                 </div>
+                <div>
+                    Kamu lahir pada hari : {this.state.wewaran_kamu.saptawara}, {this.state.wewaran_kamu.pancawara}<br/>
+                    {this.state.match.level}
+                </div>
+                  </Col>
+                </Row>
+                
             </Container>
+            </div>
         )
     }
 }
