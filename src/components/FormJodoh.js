@@ -41,34 +41,65 @@ export default class FormJodoh extends Component {
     this.setState({isSubmitted: false});
   }
 
+  checkEmailValid = email => {
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+      this.state.email
+    );
+  };
+
+  checkFormValid() {
+    if (
+      !this.state.email_invalid &&
+      !this.state.namaanda_invalid &&
+      !this.state.tl1_invalid &&
+      !this.state.namapasangan_invalid &&
+      !this.state.tl2_invalid
+    ) {
+      this.setState({formvalid: true});
+    } else {
+      this.setState({formvalid: false});
+    }
+  }
+
   handleButtonCek = async event => {
     event.preventDefault();
     //alert(this.state.email.length);
-    if (this.state.email.length === 0) {
-      await this.setState({formvalid: false});
+
+    if (
+      !this.checkEmailValid(this.state.email) &&
+      this.state.email.length < 1
+    ) {
       await this.setState({email_invalid: true});
-    } else if (this.state.namaanda.length === 0) {
-      await this.setState({formvalid: false});
+    }
+    if (this.state.namaanda.length === 0) {
       await this.setState({namaanda_invalid: true});
     }
-
+    if (this.state.tl1.length === 0) {
+      await this.setState({tl1_invalid: true});
+    }
+    if (this.state.namapasangan.length === 0) {
+      await this.setState({namapasangan_invalid: true});
+    }
+    if (this.state.tl2.length === 0) {
+      await this.setState({tl2_invalid: true});
+    }
+    this.checkFormValid();
     this.state.formvalid
       ? this.setState({isSubmitted: true})
       : this.setState({isSubmitted: false});
-    // alert(this.state.isSubmitted);
-    // alert(
-    //   this.state.email +
-    //     this.state.namaanda +
-    //     this.state.tl1 +
-    //     this.state.namapasangan +
-    //     this.state.tl2
-    // );
   };
 
   changeHandler = event => {
     this.setState({[event.target.name]: event.target.value});
-    this.setState({[`${event.target.name}_invalid`]: false});
-    this.setState({formvalid: true});
+
+    if (event.target.name === 'email') {
+      if (this.checkEmailValid(this.state.email)) {
+        this.setState({[`${event.target.name}_invalid`]: false});
+      }
+    } else {
+      this.setState({[`${event.target.name}_invalid`]: false});
+    }
+    this.checkFormValid();
   };
 
   render() {
