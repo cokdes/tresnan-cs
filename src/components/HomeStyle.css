@@ -1,0 +1,10 @@
+.label {
+    margin: 10px;
+    font-size: 0.8rem;
+}
+
+.inputnama {
+    border-radius: 10;
+    height: 20px;
+    font-size: 0.85rem;
+}

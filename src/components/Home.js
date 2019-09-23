@@ -1,27 +1,28 @@
 import React, { Component } from "react";
 import {
   Container,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
   Navbar,
   NavbarBrand,
   Row,
   Col,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText
+  Form,
+  Button
 } from "reactstrap";
+import FormJodoh from "./FormJodoh";
 import axios from "axios";
 
 export default class Home extends Component {
-  state = {
-    wewaran_kamu: {},
-    wewaran_pasangan: {},
-    match: {}
-  };
+  constructor(props) {
+    super(props);
+    this.handleButtonCek = this.handleButtonCek.bind(this);
+    this.handleButtonTry = this.handleButtonTry.bind(this);
+    this.state = {
+      wewaran_kamu: {},
+      wewaran_pasangan: {},
+      match: {},
+      isSubmitted: false
+    };
+  }
 
   fetchProducts = async () => {
     // add call to AWS API Gateway to fetch products here
@@ -47,7 +48,17 @@ export default class Home extends Component {
     this.fetchProducts();
   };
 
+  handleButtonTry() {
+    this.setState({ isSubmitted: false });
+  }
+
+  handleButtonCek() {
+    this.setState({ isSubmitted: true });
+  }
+
   render() {
+    const isSubmitted = this.state.isSubmitted;
+
     return (
       <div style={{ fontFamily: '"Poppins", sans-serif' }}>
         <Navbar color="faded" light expand="md">
@@ -56,13 +67,15 @@ export default class Home extends Component {
           </NavbarBrand>
         </Navbar>
         <Container>
+          <br />
           <Row>
-            <Col md="6">
-              <h5 style={{ color: "#364F6B", fontSize: "1.2em" }}>
-                Karena <strong>hidup</strong> anda begitu berharga
+            <Col md="5">
+              <h5 style={{ color: "#364F6B", fontSize: "1.4em" }}>
+                Karena <strong>hidup</strong> anda begitu{" "}
+                <strong>berharga</strong>
               </h5>
-              <p style={{ color: "orange" }}>
-                Pilihlah jodoh terbaik untuk menjalaninya
+              <p style={{ color: "#dd8218" }}>
+                Pilihlah <strong>jodoh terbaik untuk menjalaninya</strong>
               </p>
               <div
                 style={{
@@ -72,179 +85,42 @@ export default class Home extends Component {
                   boxShadow: "0px 2px 4px grey"
                 }}
               >
-                <h6 style={{ textAlign: "center" }}>
-                  Cek kecocokan jodoh anda sekarang
-                </h6>
                 <Form>
-                  <FormGroup style={{ marginBottom: 6 }}>
-                    <Label
-                      for="email"
-                      style={{ margin: 10, fontSize: "0.85rem" }}
-                    >
-                      Alamat Email Anda
-                    </Label>
-                    <InputGroup>
-                      <Input
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder="jayaprana@tresnan.co"
+                  {isSubmitted ? (
+                    <div>
+                      Mantapp
+                      <br />
+                      <Button
                         style={{
-                          borderRadius: "10px 0 0 10px",
-                          height: "38px",
-                          fontSize: "0.85rem"
-                        }}
-                      />
-                      <InputGroupAddon addonType="append">
-                        <InputGroupText
-                          style={{
-                            backgroundColor: "none",
-                            borderRadius: "0 10px 10px 0"
-                          }}
-                        >
-                          @
-                        </InputGroupText>
-                      </InputGroupAddon>
-                    </InputGroup>
-                  </FormGroup>
-                  <FormGroup style={{ marginBottom: 6 }}>
-                    <Label
-                      for="namaanda"
-                      style={{ margin: 10, fontSize: "0.85rem" }}
-                    >
-                      Nama Anda
-                    </Label>
-                    <InputGroup>
-                      <Input
-                        type="text"
-                        name="namaanda"
-                        id="namaanda"
-                        placeholder="Mr./Mrs. Smith"
-                        style={{
+                          backgroundColor: "#FC5185",
                           borderRadius: 10,
-                          height: "38px",
-                          fontSize: "0.85rem"
+                          border: "none",
+                          boxShadow: "0 2px 2px grey",
+                          padding: "12px 30px 12px 30px"
                         }}
-                      />
-                    </InputGroup>
-                  </FormGroup>
-                  <FormGroup style={{ marginBottom: 6 }}>
-                    <Label
-                      for="tl2"
-                      style={{ margin: 10, fontSize: "0.85rem" }}
-                    >
-                      Tanggal Lahir Anda
-                    </Label>
-                    <InputGroup>
-                      <Input
-                        type="date"
-                        name="tl1"
-                        id="tl1"
-                        placeholder="date placeholder"
+                        onClick={this.handleButtonTry}
+                      >
+                        Coba Lagi
+                      </Button>
+                    </div>
+                  ) : (
+                    <div>
+                      <FormJodoh />
+                      <Button
                         style={{
-                          borderRadius: "10px 0 0 10px",
-                          height: "38px",
-                          fontSize: "0.85rem"
-                        }}
-                      />
-                      <InputGroupAddon addonType="append">
-                        <InputGroupText
-                          style={{
-                            backgroundColor: "none",
-                            borderRadius: "0 10px 10px 0"
-                          }}
-                        >
-                          @
-                        </InputGroupText>
-                      </InputGroupAddon>
-                    </InputGroup>
-                  </FormGroup>
-                  <FormGroup style={{ marginBottom: 6 }}>
-                    <Label
-                      for="namapasangan"
-                      style={{ margin: 10, fontSize: "0.85rem" }}
-                    >
-                      Nama Pasangan Anda
-                    </Label>
-                    <InputGroup>
-                      <Input
-                        type="text"
-                        name="namapasangan"
-                        id="namapasangan"
-                        placeholder="Mr./Mrs. Smith"
-                        style={{
+                          backgroundColor: "#FC5185",
                           borderRadius: 10,
-                          height: "38px",
-                          fontSize: "0.85rem"
+                          border: "none",
+                          boxShadow: "0 2px 2px grey",
+                          padding: "12px 30px 12px 30px"
                         }}
-                      />
-                    </InputGroup>
-                  </FormGroup>
-                  <FormGroup style={{ marginBottom: 6 }}>
-                    <Label
-                      for="tl2"
-                      style={{ margin: 10, fontSize: "0.85rem" }}
-                    >
-                      Tanggal Lahir Pasangan Anda
-                    </Label>
-                    <InputGroup>
-                      <Input
-                        type="date"
-                        name="tl2"
-                        id="tl2"
-                        placeholder="date placeholder"
-                        style={{
-                          borderRadius: "10px 0 0 10px",
-                          height: "38px",
-                          fontSize: "0.85rem"
-                        }}
-                      />
-                      <InputGroupAddon addonType="append">
-                        <InputGroupText
-                          style={{
-                            backgroundColor: "none",
-                            borderRadius: "0 10px 10px 0"
-                          }}
-                        >
-                          @
-                        </InputGroupText>
-                      </InputGroupAddon>
-                    </InputGroup>
-                  </FormGroup>{" "}
-                  <FormGroup style={{ fontSize: "0.85rem" }}>
-                    <Label for="radio1" style={{ margin: 10 }}>
-                      Hubungan anda dengan pasangan
-                    </Label>
-                    <br />
+                        onClick={this.handleButtonCek}
+                      >
+                        Cek Sekarang >>
+                      </Button>
+                    </div>
+                  )}
 
-                    <FormGroup check inline style={{ marginLeft: 10 }}>
-                      <Label check>
-                        <Input type="radio" name="radio1" checked /> PDKT
-                      </Label>
-                    </FormGroup>
-                    <FormGroup check inline>
-                      <Label check>
-                        <Input type="radio" name="radio1" /> Pacaran
-                      </Label>
-                    </FormGroup>
-                    <FormGroup check inline>
-                      <Label check>
-                        <Input type="radio" name="radio1" /> Menikah
-                      </Label>
-                    </FormGroup>
-                  </FormGroup>
-                  <br />
-                  <Button
-                    style={{
-                      backgroundColor: "#FC5185",
-                      borderRadius: 10,
-                      border: "none",
-                      boxShadow: "0 2px 2px grey"
-                    }}
-                  >
-                    Cek Sekarang >>
-                  </Button>
-                  <br />
                   <br />
                   <p style={{ fontSize: "0.8rem" }}>
                     *) Perhitungan kecocokan jodoh ini adalah berdasarkan
