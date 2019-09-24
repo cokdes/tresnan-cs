@@ -1,18 +1,8 @@
 import React, { Component } from "react";
 import { Container, Navbar, NavbarBrand, Row, Col } from "reactstrap";
 import FormJodoh from "./FormJodoh";
-import axios from "axios";
 
 export default class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      wewaran_kamu: {},
-      wewaran_pasangan: {},
-      match: {}
-    };
-  }
-
   render() {
     return (
       <div style={{ fontFamily: '"Poppins", sans-serif' }}>

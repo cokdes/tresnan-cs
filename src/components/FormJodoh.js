@@ -158,7 +158,7 @@ export default class FormJodoh extends Component {
         {!isSubmitted ? (
           <Form>
             <h6 style={{ textAlign: "center" }}>
-              Cek <strong>kecocokan jodoh*</strong> anda sekarang
+              Cek <strong>kecocokan jodoh</strong>* anda sekarang
             </h6>
             <FormGroup style={{ marginBottom: 6 }}>
               <Label for="email" className="label">
@@ -370,12 +370,14 @@ export default class FormJodoh extends Component {
         ) : (
           <div>
             {this.state.loading ? (
-              <div
-                className="lds-css ng-scope"
-                style={{ alignContent: "center" }}
-              >
+              <div className="lds-css ng-scope" style={{ textAlign: "center" }}>
+                Harap menunggu...
                 <div
-                  style={{ width: "100%", height: "100%" }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    alignContent: "center"
+                  }}
                   className="lds-heart"
                 >
                   <div></div>
@@ -384,7 +386,8 @@ export default class FormJodoh extends Component {
             ) : (
               <div>
                 <h6 style={{ textAlign: "center" }}>
-                  Hasil <strong>kecocokan jodoh</strong>{" "}
+                  Hasil <strong>kecocokan jodoh</strong>
+                  {"* "}
                   <span style={{ textTransform: "capitalize" }}>
                     {this.state.namaanda}
                   </span>{" "}
@@ -415,19 +418,27 @@ export default class FormJodoh extends Component {
                   </p>
                   <p>
                     Berdasarkan perhitungan perjodohan dari Lontar Tri Premana,
-                    kecocokan anda dan pasangan adalah {this.state.match.level},{" "}
-                    {this.state.match.detail} Disarankan anda dan pasangan untuk{" "}
-                    {this.state.match.saran}
+                    kecocokan{" "}
+                    <span style={{ textTransform: "capitalize" }}>
+                      {this.state.namaanda}
+                    </span>{" "}
+                    dan{" "}
+                    <span style={{ textTransform: "capitalize" }}>
+                      {this.state.namapasangan}
+                    </span>{" "}
+                    adalah {this.state.match.level}. {this.state.match.detail}{" "}
+                    Disarankan anda dan pasangan untuk {this.state.match.saran}
                   </p>
 
                   <br />
                   <Button
                     style={{
+                      fontSize: "0.9rem",
                       backgroundColor: "#FC5185",
                       borderRadius: 10,
                       border: "none",
                       boxShadow: "0 2px 2px grey",
-                      padding: "12px 30px 12px 30px"
+                      padding: "8px 20px 8px 20px"
                     }}
                     onClick={this.handleButtonTry}
                   >
