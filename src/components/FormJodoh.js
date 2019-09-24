@@ -404,8 +404,9 @@ export default class FormJodoh extends Component {
                     </span>{" "}
                     lahir pada hari{" "}
                     <strong>
-                      {`${this.state.wewaran_kamu.saptawara}, ${this.state.wewaran_kamu.pancawara}, ${this.state.wewaran_kamu.sadwara} dengan total urip = ${this.state.totalurip_kamu}`}
-                    </strong>
+                      {`${this.state.wewaran_kamu.saptawara}, ${this.state.wewaran_kamu.pancawara}, ${this.state.wewaran_kamu.sadwara}`}
+                    </strong>{" "}
+                    dengan total urip = {this.state.totalurip_kamu}
                   </p>
                   <p>
                     <span style={{ textTransform: "capitalize" }}>
@@ -413,8 +414,9 @@ export default class FormJodoh extends Component {
                     </span>{" "}
                     lahir pada hari{" "}
                     <strong>
-                      {`${this.state.wewaran_pasangan.saptawara}, ${this.state.wewaran_pasangan.pancawara}, ${this.state.wewaran_pasangan.sadwara} dengan total urip = ${this.state.totalurip_pasangan}`}
-                    </strong>
+                      {`${this.state.wewaran_pasangan.saptawara}, ${this.state.wewaran_pasangan.pancawara}, ${this.state.wewaran_pasangan.sadwara}`}
+                    </strong>{" "}
+                    dengan total urip = {this.state.totalurip_pasangan}
                   </p>
                   <p>
                     Berdasarkan perhitungan perjodohan dari Lontar Tri Premana,
