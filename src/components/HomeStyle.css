@@ -15,6 +15,18 @@
     font-size: 0.85rem;
 }
 
+.right-section {
+    position: absolute;
+    top: 20px;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background-size: 65%;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+}
+
 @keyframes lds-heart {
     0% {
         -webkit-transform: scale(0.85);

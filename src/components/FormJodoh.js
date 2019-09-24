@@ -186,7 +186,7 @@ export default class FormJodoh extends Component {
                       borderRadius: "0 10px 10px 0"
                     }}
                   >
-                    <i class="material-icons md-18">email</i>
+                    <i className="material-icons md-18">email</i>
                   </InputGroupText>
                 </InputGroupAddon>
                 <FormFeedback className="formfeedback">
@@ -248,7 +248,7 @@ export default class FormJodoh extends Component {
                       borderRadius: "0 10px 10px 0"
                     }}
                   >
-                    <i class="material-icons md-18">date_range</i>
+                    <i className="material-icons md-18">date_range</i>
                   </InputGroupText>
                 </InputGroupAddon>
                 <FormFeedback className="formfeedback">
@@ -306,7 +306,7 @@ export default class FormJodoh extends Component {
                       borderRadius: "0 10px 10px 0"
                     }}
                   >
-                    <i class="material-icons md-18">date_range</i>
+                    <i className="material-icons md-18">date_range</i>
                   </InputGroupText>
                 </InputGroupAddon>
                 <FormFeedback className="formfeedback">
@@ -349,8 +349,7 @@ export default class FormJodoh extends Component {
               onClick={this.handleButtonReset}
             >
               Muat Ulang
-            </Button>
-            &nbsp;
+            </Button>{" "}
             <Button
               style={{
                 fontSize: "0.9rem",

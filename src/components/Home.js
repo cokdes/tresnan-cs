@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Navbar, NavbarBrand, Row, Col } from "reactstrap";
 import FormJodoh from "./FormJodoh";
+import Background from "./cute.jpg";
 
 export default class Home extends Component {
   render() {
@@ -41,7 +42,14 @@ export default class Home extends Component {
                 </p>
               </div>
             </Col>
-            <Col md="6">Ini images nya</Col>
+            <Col md="7">
+              <div
+                className="right-section"
+                style={{
+                  backgroundImage: `url("${Background}")`
+                }}
+              />
+            </Col>
           </Row>
         </Container>
       </div>
