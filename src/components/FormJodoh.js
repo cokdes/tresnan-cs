@@ -99,11 +99,11 @@ export default class FormJodoh extends Component {
       email_invalid: false,
       namaanda: '',
       namaanda_invalid: false,
-      tl1: '',
+      tl1: '1990-01-01',
       tl1_invalid: false,
       namapasangan: '',
       namapasangan_invalid: false,
-      tl2: '',
+      tl2: '1990-01-01',
       tl2_invalid: false,
     });
   }
@@ -165,30 +165,37 @@ export default class FormJodoh extends Component {
                 Alamat Email Anda
               </Label>
               <InputGroup>
+                <InputGroupAddon addonType="append">
+                  <InputGroupText
+                    style={{
+                      borderRadius: '10px 0 0 10px',
+                      borderRight: 'none',
+                      padding: 5,
+                    }}
+                  >
+                    <img src="email.png" alt="email" />
+                  </InputGroupText>
+                </InputGroupAddon>
                 <Input
                   type="email"
                   name="email"
                   id="email"
-                  placeholder="love@tresnan.co"
+                  placeholder="contoh: love@tresnan.co"
+                  className="form-control"
                   style={{
-                    borderRadius: '10px 0 0 10px',
+                    borderRadius: '0 10px 10px 0',
                     height: '38px',
                     fontSize: '0.75rem',
+                    paddingLeft: 5,
+                    // background: 'url(email.png) no-repeat scroll 7px 7px',
+                    // backgroundColor: '#ffffff',
+                    // paddingLeft: 35,
                   }}
                   value={this.state.email}
                   onChange={this.changeHandler}
                   invalid={this.state.email_invalid}
                 />
-                <InputGroupAddon addonType="append">
-                  <InputGroupText
-                    style={{
-                      backgroundColor: 'none',
-                      borderRadius: '0 10px 10px 0',
-                    }}
-                  >
-                    <i className="material-icons md-18">email</i>
-                  </InputGroupText>
-                </InputGroupAddon>
+
                 <FormFeedback className="formfeedback">
                   Mohon mengisi email anda sesuai format baku (contoh:
                   love@tresnan.co)
@@ -203,15 +210,27 @@ export default class FormJodoh extends Component {
                 Nama Anda
               </Label>
               <InputGroup>
+                <InputGroupAddon addonType="append">
+                  <InputGroupText
+                    style={{
+                      borderRadius: '10px 0 0 10px',
+                      borderRight: 'none',
+                      padding: 5,
+                    }}
+                  >
+                    <img src="user.png" alt="user" />
+                  </InputGroupText>
+                </InputGroupAddon>
                 <Input
                   type="text"
                   name="namaanda"
                   id="namaanda"
-                  placeholder="Mr./Mrs. Smith"
+                  placeholder="contoh: Mr./Mrs. Smith"
                   style={{
-                    borderRadius: 10,
+                    borderRadius: '0 10px 10px 0',
                     height: '38px',
                     fontSize: '0.75em',
+                    paddingLeft: 5,
                   }}
                   value={this.state.namaanda}
                   onChange={this.changeHandler}
@@ -227,30 +246,32 @@ export default class FormJodoh extends Component {
                 Tanggal Lahir Anda
               </Label>
               <InputGroup>
+                <InputGroupAddon addonType="append">
+                  <InputGroupText
+                    style={{
+                      borderRadius: '10px 0 0 10px',
+                      borderRight: 'none',
+                      padding: 7,
+                    }}
+                  >
+                    <img src="calendar.png" alt="user" />
+                  </InputGroupText>
+                </InputGroupAddon>
                 <Input
                   type="date"
                   name="tl1"
                   id="tl1"
                   placeholder="date placeholder"
                   style={{
-                    borderRadius: '10px 0 0 10px',
+                    borderRadius: '0 10px 10px 0',
                     height: '38px',
                     fontSize: '0.75em',
+                    paddingLeft: 5,
                   }}
                   value={this.state.tl1}
                   onChange={this.changeHandler}
                   invalid={this.state.tl1_invalid}
                 />
-                <InputGroupAddon addonType="append">
-                  <InputGroupText
-                    style={{
-                      backgroundColor: 'none',
-                      borderRadius: '0 10px 10px 0',
-                    }}
-                  >
-                    <i className="material-icons md-18">date_range</i>
-                  </InputGroupText>
-                </InputGroupAddon>
                 <FormFeedback className="formfeedback">
                   Mohon mengisi tanggal lahir anda
                 </FormFeedback>
@@ -261,15 +282,27 @@ export default class FormJodoh extends Component {
                 Nama Pasangan Anda
               </Label>
               <InputGroup>
+                <InputGroupAddon addonType="append">
+                  <InputGroupText
+                    style={{
+                      borderRadius: '10px 0 0 10px',
+                      borderRight: 'none',
+                      padding: 5,
+                    }}
+                  >
+                    <img src="user.png" alt="user" />
+                  </InputGroupText>
+                </InputGroupAddon>
                 <Input
                   type="text"
                   name="namapasangan"
                   id="namapasangan"
-                  placeholder="Mr./Mrs. Smith"
+                  placeholder="contoh: Mr./Mrs. Smith"
                   style={{
-                    borderRadius: 10,
+                    borderRadius: '0 10px 10px 0',
                     height: '38px',
                     fontSize: '0.75em',
+                    paddingLeft: 5,
                   }}
                   value={this.state.namapasangan}
                   onChange={this.changeHandler}
@@ -285,30 +318,32 @@ export default class FormJodoh extends Component {
                 Tanggal Lahir Pasangan Anda
               </Label>
               <InputGroup>
+                <InputGroupAddon addonType="append">
+                  <InputGroupText
+                    style={{
+                      borderRadius: '10px 0 0 10px',
+                      borderRight: 'none',
+                      padding: 7,
+                    }}
+                  >
+                    <img src="calendar.png" alt="user" />
+                  </InputGroupText>
+                </InputGroupAddon>
                 <Input
                   type="date"
                   name="tl2"
                   id="tl2"
                   placeholder="date placeholder"
                   style={{
-                    borderRadius: '10px 0 0 10px',
+                    borderRadius: '0 10px 10px 0',
                     height: '38px',
                     fontSize: '0.75em',
+                    paddingLeft: 5,
                   }}
                   value={this.state.tl2}
                   onChange={this.changeHandler}
                   invalid={this.state.tl2_invalid}
                 />
-                <InputGroupAddon addonType="append">
-                  <InputGroupText
-                    style={{
-                      backgroundColor: 'none',
-                      borderRadius: '0 10px 10px 0',
-                    }}
-                  >
-                    <i className="material-icons md-18">date_range</i>
-                  </InputGroupText>
-                </InputGroupAddon>
                 <FormFeedback className="formfeedback">
                   Mohon mengisi tanggal lahir pasangan anda
                 </FormFeedback>
@@ -390,7 +425,7 @@ export default class FormJodoh extends Component {
                   <span style={{textTransform: 'capitalize'}}>
                     {this.state.namaanda}
                   </span>{' '}
-                  &
+                  &{' '}
                   <span style={{textTransform: 'capitalize'}}>
                     {this.state.namapasangan}
                   </span>
