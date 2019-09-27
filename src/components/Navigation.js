@@ -8,6 +8,7 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
+import "./NavStyle.css";
 
 export default class Navigation extends Component {
   constructor(props) {
@@ -25,13 +26,13 @@ export default class Navigation extends Component {
   }
   render() {
     return (
-      <div>
+      <div style={{ fontFamily: '"Poppins", sans-serif' }}>
         <Navbar
           color="faded"
           light
           expand="md"
           style={{
-            fontSize: "0.9em",
+            fontSize: "0.85em",
             fontWeight: "600"
           }}
         >
@@ -42,16 +43,24 @@ export default class Navigation extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/">Cek Jodoh</NavLink>
+                <NavLink href="/" active>
+                  Cek Jodoh
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/">Tentang Tresnan</NavLink>
+                <NavLink href="/about" active>
+                  Tentang Tresnan
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/">Donasi</NavLink>
+                <NavLink href="/donation" active>
+                  Donasi
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/">Hubungi Kami</NavLink>
+                <NavLink href="/contact" active>
+                  Hubungi Kami
+                </NavLink>
               </NavItem>
             </Nav>
           </Collapse>

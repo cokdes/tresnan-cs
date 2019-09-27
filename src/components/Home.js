@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "reactstrap";
-import Navigation from "./Navigation";
 import FormJodoh from "./FormJodoh";
 import Background from "./cute.jpg";
 
@@ -8,7 +7,6 @@ export default class Home extends Component {
   render() {
     return (
       <div style={{ fontFamily: '"Poppins", sans-serif' }}>
-        <Navigation />
         <Container>
           <Row>
             <Col md="5">
