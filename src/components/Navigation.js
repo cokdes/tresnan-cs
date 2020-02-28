@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
 import {
   Collapse,
   Navbar,
@@ -6,9 +6,11 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink
-} from "reactstrap";
-import "./NavStyle.css";
+  NavLink,
+  Container,
+  Badge,
+} from 'reactstrap';
+import './NavStyle.css';
 
 export default class Navigation extends Component {
   constructor(props) {
@@ -16,56 +18,45 @@ export default class Navigation extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
     };
   }
   toggle() {
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: !this.state.isOpen,
     });
   }
   render() {
     return (
-      <div style={{ fontFamily: '"Poppins", sans-serif' }}>
-        <Navbar
-          color="faded"
-          light
-          expand="md"
-          style={{
-            fontSize: "0.85em",
-            fontWeight: "600"
-          }}
-        >
-          <NavbarBrand href="/">
-            <img src="logo_tresnan.png" alt="Logo" width="120" />
-          </NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+      <Container>
+        <div style={{fontFamily: '"Poppins", sans-serif'}}>
+          <Navbar
+            light
+            style={{
+              fontSize: '1em',
+              height: '100px',
+              fontWeight: '600',
+              padding: 0,
+            }}
+            expand="md"
+          >
+            <NavbarBrand href="/">
+              <img src="tresnanlogo3.png" alt="Logo" width="150" />
+            </NavbarBrand>
+
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/" active>
-                  Cek Jodoh
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/about" active>
-                  Tentang Tresnan
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/donation" active>
-                  Donasi
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/contact" active>
-                  Hubungi Kami
+                <NavLink
+                  href="https://forms.gle/9Fj2wFSQeVHT8zhx8"
+                  target="_blank"
+                >
+                  <Badge color="warning">Ikuti survey berhadiah kami!!</Badge>
                 </NavLink>
               </NavItem>
             </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
+          </Navbar>
+        </div>
+      </Container>
     );
   }
 }
