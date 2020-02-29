@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Container, Row, Col} from 'reactstrap';
 import FormJodoh from './FormJodoh';
 import Background from './cute.jpg';
+import Footer from './Footer';
 
 export default class Home extends Component {
   render() {
@@ -50,6 +51,11 @@ export default class Home extends Component {
                     minHeight: '500px',
                   }}
                 ></div>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Footer />
               </Col>
             </Row>
           </div>

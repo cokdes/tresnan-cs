@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {
-  Collapse,
   Navbar,
-  NavbarToggler,
   NavbarBrand,
   Nav,
   NavItem,
@@ -39,6 +37,7 @@ export default class Navigation extends Component {
               padding: 0,
             }}
             expand="md"
+            fixed-top
           >
             <NavbarBrand href="/">
               <img src="tresnanlogo3.png" alt="Logo" width="150" />
