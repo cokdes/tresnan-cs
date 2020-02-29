@@ -25,7 +25,7 @@ export default class Footer extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src="iglogo.webp" alt="tresnan.bali" width="25px" />{' '}
+                  <img src="iglogo2.jpg" alt="tresnan.bali" width="25px" />{' '}
                 </a>
                 <a
                   href="https://www.facebook.com/tresnan.co/"
