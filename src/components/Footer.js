@@ -14,12 +14,12 @@ export default class Footer extends Component {
         >
           <Row>
             <Col md="6">
-              <div style={{textAlign: 'right', padding: '8px'}}>
-                <strong>© Tresnan 2020</strong>
+              <div style={{textAlign: 'center', padding: '8px'}}>
+                <strong>© Tresnan 2017-2020</strong>
               </div>
             </Col>
             <Col md="6">
-              <div style={{padding: '8px'}}>
+              <div style={{textAlign: 'center', padding: '8px'}}>
                 <a
                   href="https://www.instagram.com/tresnan.bali/"
                   target="_blank"

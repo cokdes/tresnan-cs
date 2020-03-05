@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import {
   FormGroup,
   Label,
@@ -10,10 +10,11 @@ import {
   Button,
   Form,
   FormText,
-  FormFeedback,
-} from 'reactstrap';
-import './HomeStyle.css';
-import axios from 'axios';
+  FormFeedback
+} from "reactstrap";
+import "./HomeStyle.css";
+import axios from "axios";
+import { ReCaptcha } from "react-recaptcha-google";
 
 export default class FormJodoh extends Component {
   constructor(props) {
@@ -29,34 +30,55 @@ export default class FormJodoh extends Component {
       totalurip_pasangan: 0,
       hasil_patemon: 0,
       isSubmitted: false,
-      email: '',
+      email: "",
       email_invalid: false,
-      namaanda: '',
+      namaanda: "",
       namaanda_invalid: false,
-      tl1: '1990-01-01',
+      tl1: "1990-01-01",
       tl1_invalid: false,
-      namapasangan: '',
+      namapasangan: "",
       namapasangan_invalid: false,
-      tl2: '1990-01-01',
+      tl2: "1990-01-01",
       tl2_invalid: false,
       formvalid: true,
-      loading: true,
+      loading: true
     };
+    this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
+    this.verifyCallback = this.verifyCallback.bind(this);
   }
 
+  componentDidMount() {
+    if (this.captchaDemo) {
+      console.log("started, just a second...");
+      this.captchaDemo.reset();
+      this.captchaDemo.execute();
+    }
+  }
+
+  onLoadRecaptcha() {
+    if (this.captchaDemo) {
+      this.captchaDemo.reset();
+      this.captchaDemo.execute();
+    }
+  }
+
+  verifyCallback(recaptchaToken) {
+    // Here you will get the final recaptchaToken!!!
+    console.log(recaptchaToken, "<= your recaptcha token");
+  }
   checkWewaran = async () => {
     // add call to AWS API Gateway to fetch products here
     // then set them in state
     try {
       const params = {
-        tl1: this.state.tl1 + 'T00:00:00Z',
-        tl2: this.state.tl2 + 'T00:00:00Z',
+        tl1: this.state.tl1 + "T00:00:00Z",
+        tl2: this.state.tl2 + "T00:00:00Z",
         email: this.state.email,
         nama: this.state.namaanda,
-        namapasangan: this.state.namapasangan,
+        namapasangan: this.state.namapasangan
       };
       const res = await axios.post(
-        'https://v6e49pog65.execute-api.ap-southeast-1.amazonaws.com/prod/tripremana/',
+        "https://v6e49pog65.execute-api.ap-southeast-1.amazonaws.com/prod/tripremana/",
         params
       );
       this.setState({
@@ -66,7 +88,7 @@ export default class FormJodoh extends Component {
         totalurip_kamu: res.data.totalurip_kamu,
         totalurip_pasangan: res.data.totalurip_pasangan,
         hasil_patemon: res.data.hasil_patemon,
-        loading: false,
+        loading: false
       });
     } catch (err) {
       console.log(`An Error has occured: ${err}`);
@@ -74,7 +96,7 @@ export default class FormJodoh extends Component {
   };
 
   handleButtonTry() {
-    this.setState({isSubmitted: false, loading: true});
+    this.setState({ isSubmitted: false, loading: true });
   }
 
   checkEmailValid = email => {
@@ -91,24 +113,24 @@ export default class FormJodoh extends Component {
       !this.state.namapasangan_invalid &&
       !this.state.tl2_invalid
     ) {
-      this.setState({formvalid: true});
+      this.setState({ formvalid: true });
     } else {
-      this.setState({formvalid: false});
+      this.setState({ formvalid: false });
     }
   }
 
   handleButtonReset() {
     this.setState({
-      email: '',
+      email: "",
       email_invalid: false,
-      namaanda: '',
+      namaanda: "",
       namaanda_invalid: false,
-      tl1: '1990-01-01',
+      tl1: "1990-01-01",
       tl1_invalid: false,
-      namapasangan: '',
+      namapasangan: "",
       namapasangan_invalid: false,
-      tl2: '1990-01-01',
-      tl2_invalid: false,
+      tl2: "1990-01-01",
+      tl2_invalid: false
     });
   }
 
@@ -119,37 +141,37 @@ export default class FormJodoh extends Component {
       !this.checkEmailValid(this.state.email) &&
       this.state.email.length < 1
     ) {
-      await this.setState({email_invalid: true});
+      await this.setState({ email_invalid: true });
     }
     if (this.state.namaanda.length === 0) {
-      await this.setState({namaanda_invalid: true});
+      await this.setState({ namaanda_invalid: true });
     }
     if (this.state.tl1.length === 0) {
-      await this.setState({tl1_invalid: true});
+      await this.setState({ tl1_invalid: true });
     }
     if (this.state.namapasangan.length === 0) {
-      await this.setState({namapasangan_invalid: true});
+      await this.setState({ namapasangan_invalid: true });
     }
     if (this.state.tl2.length === 0) {
-      await this.setState({tl2_invalid: true});
+      await this.setState({ tl2_invalid: true });
     }
     this.checkFormValid();
     this.state.formvalid
-      ? this.setState({isSubmitted: true})
-      : this.setState({isSubmitted: false});
+      ? this.setState({ isSubmitted: true })
+      : this.setState({ isSubmitted: false });
 
     this.checkWewaran();
   };
 
   changeHandler = event => {
-    this.setState({[event.target.name]: event.target.value});
+    this.setState({ [event.target.name]: event.target.value });
 
-    if (event.target.name === 'email') {
+    if (event.target.name === "email") {
       if (this.checkEmailValid(this.state.email)) {
-        this.setState({[`${event.target.name}_invalid`]: false});
+        this.setState({ [`${event.target.name}_invalid`]: false });
       }
     } else {
-      this.setState({[`${event.target.name}_invalid`]: false});
+      this.setState({ [`${event.target.name}_invalid`]: false });
     }
     this.checkFormValid();
   };
@@ -160,10 +182,10 @@ export default class FormJodoh extends Component {
       <div>
         {!isSubmitted ? (
           <Form>
-            <h6 style={{textAlign: 'center'}}>
+            <h6 style={{ textAlign: "center" }}>
               Cek <strong>kecocokan jodoh</strong>* anda sekarang
             </h6>
-            <FormGroup style={{marginBottom: 6}}>
+            <FormGroup style={{ marginBottom: 6 }}>
               <Label for="email" className="label">
                 Alamat Email Anda
               </Label>
@@ -171,9 +193,9 @@ export default class FormJodoh extends Component {
                 <InputGroupAddon addonType="append">
                   <InputGroupText
                     style={{
-                      borderRadius: '10px 0 0 10px',
-                      borderRight: 'none',
-                      padding: 5,
+                      borderRadius: "10px 0 0 10px",
+                      borderRight: "none",
+                      padding: 5
                     }}
                   >
                     <img src="email.png" alt="email" />
@@ -186,10 +208,10 @@ export default class FormJodoh extends Component {
                   placeholder="contoh: love@tresnan.co"
                   className="form-control"
                   style={{
-                    borderRadius: '0 10px 10px 0',
-                    height: '38px',
-                    fontSize: '0.75rem',
-                    paddingLeft: 5,
+                    borderRadius: "0 10px 10px 0",
+                    height: "38px",
+                    fontSize: "0.75rem",
+                    paddingLeft: 5
                     // background: 'url(email.png) no-repeat scroll 7px 7px',
                     // backgroundColor: '#ffffff',
                     // paddingLeft: 35,
@@ -204,11 +226,11 @@ export default class FormJodoh extends Component {
                   love@tresnan.co)
                 </FormFeedback>
               </InputGroup>
-              <FormText style={{textAlign: 'right', fontSize: '0.65em'}}>
+              <FormText style={{ textAlign: "right", fontSize: "0.65em" }}>
                 <i>Kami tidak akan membagikan email anda kepada siapapun</i>
               </FormText>
             </FormGroup>
-            <FormGroup style={{marginBottom: 6}}>
+            <FormGroup style={{ marginBottom: 6 }}>
               <Label for="namaanda" className="label">
                 Nama Anda
               </Label>
@@ -216,9 +238,9 @@ export default class FormJodoh extends Component {
                 <InputGroupAddon addonType="append">
                   <InputGroupText
                     style={{
-                      borderRadius: '10px 0 0 10px',
-                      borderRight: 'none',
-                      padding: 5,
+                      borderRadius: "10px 0 0 10px",
+                      borderRight: "none",
+                      padding: 5
                     }}
                   >
                     <img src="user.png" alt="user" />
@@ -230,10 +252,10 @@ export default class FormJodoh extends Component {
                   id="namaanda"
                   placeholder="contoh: Mr./Mrs. Smith"
                   style={{
-                    borderRadius: '0 10px 10px 0',
-                    height: '38px',
-                    fontSize: '0.75em',
-                    paddingLeft: 5,
+                    borderRadius: "0 10px 10px 0",
+                    height: "38px",
+                    fontSize: "0.75em",
+                    paddingLeft: 5
                   }}
                   value={this.state.namaanda}
                   onChange={this.changeHandler}
@@ -244,7 +266,7 @@ export default class FormJodoh extends Component {
                 </FormFeedback>
               </InputGroup>
             </FormGroup>
-            <FormGroup style={{marginBottom: 6}}>
+            <FormGroup style={{ marginBottom: 6 }}>
               <Label for="tl2" className="label">
                 Tanggal Lahir Anda
               </Label>
@@ -252,9 +274,9 @@ export default class FormJodoh extends Component {
                 <InputGroupAddon addonType="append">
                   <InputGroupText
                     style={{
-                      borderRadius: '10px 0 0 10px',
-                      borderRight: 'none',
-                      padding: 7,
+                      borderRadius: "10px 0 0 10px",
+                      borderRight: "none",
+                      padding: 7
                     }}
                   >
                     <img src="calendar.png" alt="user" />
@@ -266,10 +288,10 @@ export default class FormJodoh extends Component {
                   id="tl1"
                   placeholder="date placeholder"
                   style={{
-                    borderRadius: '0 10px 10px 0',
-                    height: '38px',
-                    fontSize: '0.75em',
-                    paddingLeft: 5,
+                    borderRadius: "0 10px 10px 0",
+                    height: "38px",
+                    fontSize: "0.75em",
+                    paddingLeft: 5
                   }}
                   value={this.state.tl1}
                   onChange={this.changeHandler}
@@ -280,7 +302,7 @@ export default class FormJodoh extends Component {
                 </FormFeedback>
               </InputGroup>
             </FormGroup>
-            <FormGroup style={{marginBottom: 6}}>
+            <FormGroup style={{ marginBottom: 6 }}>
               <Label for="namapasangan" className="label">
                 Nama Pasangan Anda
               </Label>
@@ -288,9 +310,9 @@ export default class FormJodoh extends Component {
                 <InputGroupAddon addonType="append">
                   <InputGroupText
                     style={{
-                      borderRadius: '10px 0 0 10px',
-                      borderRight: 'none',
-                      padding: 5,
+                      borderRadius: "10px 0 0 10px",
+                      borderRight: "none",
+                      padding: 5
                     }}
                   >
                     <img src="user.png" alt="user" />
@@ -302,10 +324,10 @@ export default class FormJodoh extends Component {
                   id="namapasangan"
                   placeholder="contoh: Mr./Mrs. Smith"
                   style={{
-                    borderRadius: '0 10px 10px 0',
-                    height: '38px',
-                    fontSize: '0.75em',
-                    paddingLeft: 5,
+                    borderRadius: "0 10px 10px 0",
+                    height: "38px",
+                    fontSize: "0.75em",
+                    paddingLeft: 5
                   }}
                   value={this.state.namapasangan}
                   onChange={this.changeHandler}
@@ -316,7 +338,7 @@ export default class FormJodoh extends Component {
                 </FormFeedback>
               </InputGroup>
             </FormGroup>
-            <FormGroup style={{marginBottom: 6}}>
+            <FormGroup style={{ marginBottom: 6 }}>
               <Label for="tl2" className="label">
                 Tanggal Lahir Pasangan Anda
               </Label>
@@ -324,9 +346,9 @@ export default class FormJodoh extends Component {
                 <InputGroupAddon addonType="append">
                   <InputGroupText
                     style={{
-                      borderRadius: '10px 0 0 10px',
-                      borderRight: 'none',
-                      padding: 7,
+                      borderRadius: "10px 0 0 10px",
+                      borderRight: "none",
+                      padding: 7
                     }}
                   >
                     <img src="calendar.png" alt="user" />
@@ -338,10 +360,10 @@ export default class FormJodoh extends Component {
                   id="tl2"
                   placeholder="date placeholder"
                   style={{
-                    borderRadius: '0 10px 10px 0',
-                    height: '38px',
-                    fontSize: '0.75em',
-                    paddingLeft: 5,
+                    borderRadius: "0 10px 10px 0",
+                    height: "38px",
+                    fontSize: "0.75em",
+                    paddingLeft: 5
                   }}
                   value={this.state.tl2}
                   onChange={this.changeHandler}
@@ -351,7 +373,7 @@ export default class FormJodoh extends Component {
                   Mohon mengisi tanggal lahir pasangan anda
                 </FormFeedback>
               </InputGroup>
-            </FormGroup>{' '}
+            </FormGroup>{" "}
             {/* <FormGroup style={{fontSize: '0.75em', width: '100%'}}>
               <Label for="radio1" className="label">
                 Hubungan anda dengan pasangan
@@ -374,46 +396,63 @@ export default class FormJodoh extends Component {
                 </Label>
               </FormGroup>
             </FormGroup> */}
+            <div>
+              {/* You can replace captchaDemo with any ref word */}
+              <ReCaptcha
+                ref={el => {
+                  this.captchaDemo = el;
+                }}
+                size="invisible"
+                render="explicit"
+                sitekey="6LdezN0UAAAAAAowbDl9FR1ffMGCEVN9Y76ARYil"
+                onloadCallback={this.onLoadRecaptcha}
+                verifyCallback={this.verifyCallback}
+              />
+            </div>
             <Button
               style={{
-                fontSize: '0.9rem',
-                backgroundColor: '#b5b5b5',
+                fontSize: "0.9rem",
+                backgroundColor: "#b5b5b5",
                 borderRadius: 10,
-                border: 'none',
-                boxShadow: '0 2px 2px grey',
-                padding: '8px 20px 8px 20px',
-                margin: '10px 0 0 0',
+                border: "none",
+                boxShadow: "0 2px 2px grey",
+                padding: "8px 20px 8px 20px",
+                margin: "10px 0 0 0"
               }}
               onClick={this.handleButtonReset}
             >
               Muat Ulang
-            </Button>{' '}
+            </Button>{" "}
             <Button
               style={{
-                fontSize: '0.9rem',
-                fontWeight: '500',
-                backgroundColor: '#FC5185',
+                fontSize: "0.9rem",
+                fontWeight: "500",
+                backgroundColor: "#FC5185",
                 borderRadius: 10,
-                border: 'none',
-                boxShadow: '0 2px 2px grey',
-                padding: '8px 20px 8px 20px',
-                margin: '10px 0 0 0',
+                border: "none",
+                boxShadow: "0 2px 2px grey",
+                padding: "8px 20px 8px 20px",
+                margin: "10px 0 0 0"
               }}
               onClick={this.handleButtonCek}
             >
               Cek Sekarang >>
             </Button>
+            <br/>
+            <p style={{padding:'3px', fontSize: '0.7rem'}}>
+                    Dengan mengklik tombol "Cek Sekarang", anda setuju dengan segala <a href="/privacy_policy.html" target="_blank">Syarat & Ketentuan</a> tresnan.co
+                  </p>
           </Form>
         ) : (
           <div>
             {this.state.loading ? (
-              <div className="lds-css ng-scope" style={{textAlign: 'center'}}>
+              <div className="lds-css ng-scope" style={{ textAlign: "center" }}>
                 Harap menunggu...
                 <div
                   style={{
-                    width: '100%',
-                    height: '100%',
-                    alignContent: 'center',
+                    width: "100%",
+                    height: "100%",
+                    alignContent: "center"
                   }}
                   className="lds-heart"
                 >
@@ -422,62 +461,65 @@ export default class FormJodoh extends Component {
               </div>
             ) : (
               <div>
-                <h6 style={{textAlign: 'center'}}>
+                <h6 style={{ textAlign: "center" }}>
                   Hasil <strong>kecocokan jodoh</strong>
-                  {'* '}
-                  <span style={{textTransform: 'capitalize'}}>
+                  {"* "}
+                  <span style={{ textTransform: "capitalize" }}>
                     {this.state.namaanda}
-                  </span>{' '}
-                  &{' '}
-                  <span style={{textTransform: 'capitalize'}}>
+                  </span>{" "}
+                  &{" "}
+                  <span style={{ textTransform: "capitalize" }}>
                     {this.state.namapasangan}
                   </span>
                 </h6>
                 <br />
-                <div style={{fontSize: '0.8rem'}}>
+                <div style={{ fontSize: "0.8rem" }}>
                   <p>
-                    <span style={{textTransform: 'capitalize'}}>
+                    <span style={{ textTransform: "capitalize" }}>
                       {this.state.namaanda}
-                    </span>{' '}
-                    lahir pada hari{' '}
+                    </span>{" "}
+                    lahir pada hari{" "}
                     <strong>
                       {`${this.state.wewaran_kamu.saptawara}, ${this.state.wewaran_kamu.pancawara}, ${this.state.wewaran_kamu.sadwara}`}
-                    </strong>{' '}
-                    dengan total urip = {this.state.totalurip_kamu}
+                    </strong>{" "}
+                    <br/>dengan total urip = {this.state.totalurip_kamu}
                   </p>
                   <p>
-                    <span style={{textTransform: 'capitalize'}}>
+                    <span style={{ textTransform: "capitalize" }}>
                       {this.state.namapasangan}
-                    </span>{' '}
-                    lahir pada hari{' '}
+                    </span>{" "}
+                    lahir pada hari{" "}
                     <strong>
                       {`${this.state.wewaran_pasangan.saptawara}, ${this.state.wewaran_pasangan.pancawara}, ${this.state.wewaran_pasangan.sadwara}`}
-                    </strong>{' '}
-                    dengan total urip = {this.state.totalurip_pasangan}
+                    </strong>{" "}
+                    <br/>dengan total urip = {this.state.totalurip_pasangan}
+                  </p>
+                  <p>
+                    Mohon diperhatikan bahwa hasil dari perhitungan pencocokan jodoh ini <b><u>tidaklah 100% benar</u></b>, semua dikembalikan kembali kepada anda dan pasangan anda untuk menyikapinya.
                   </p>
                   <p>
                     Berdasarkan perhitungan perjodohan dari Lontar Tri Premana,
-                    kecocokan{' '}
-                    <span style={{textTransform: 'capitalize'}}>
+                    kecocokan{" "}
+                    <span style={{ textTransform: "capitalize" }}>
                       {this.state.namaanda}
-                    </span>{' '}
-                    dan{' '}
-                    <span style={{textTransform: 'capitalize'}}>
+                    </span>{" "}
+                    dan{" "}
+                    <span style={{ textTransform: "capitalize" }}>
                       {this.state.namapasangan}
-                    </span>{' '}
-                    adalah {this.state.match.level}. {this.state.match.detail}{' '}
+                    </span>{" "}
+                    adalah {this.state.match.level}. {this.state.match.detail}{" "}
                     Disarankan anda dan pasangan untuk {this.state.match.saran}
                   </p>
 
                   <br />
                   <Button
                     style={{
-                      fontSize: '0.9rem',
-                      backgroundColor: '#FC5185',
+                      fontSize: "0.9rem",
+                      backgroundColor: "#FC5185",
                       borderRadius: 10,
-                      border: 'none',
-                      boxShadow: '0 2px 2px grey',
-                      padding: '8px 20px 8px 20px',
+                      border: "none",
+                      boxShadow: "0 2px 2px grey",
+                      padding: "8px 20px 8px 20px"
                     }}
                     onClick={this.handleButtonTry}
                   >

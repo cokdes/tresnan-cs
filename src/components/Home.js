@@ -30,8 +30,6 @@ export default class Home extends Component {
                   }}
                 >
                   <FormJodoh />
-
-                  <br />
                   <p style={{fontSize: '0.7rem'}}>
                     *) Perhitungan kecocokan jodoh ini adalah berdasarkan
                     warisan budaya nusantara (Lontar Tripramana) berdasarkan
@@ -53,7 +51,6 @@ export default class Home extends Component {
             </Row>
           </div>
         </Container>
-        <div class="elfsight-app-de2cba49-4609-4ac0-9047-bd868cc1b629"></div>
       </div>
     );
   }
